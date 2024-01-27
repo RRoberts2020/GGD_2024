@@ -14,6 +14,8 @@ public class Audience : MonoBehaviour
     void Awake()
     {
         happy = true;
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     void Update()
