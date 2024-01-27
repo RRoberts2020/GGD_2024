@@ -5,7 +5,7 @@ using UnityEngine;
 public class Card : MonoBehaviour
 {
     // Parent script of DAD and CDAD
-    protected int point;
+    [HideInInspector] public int point;
 
     public virtual int GetCardValue()
     {

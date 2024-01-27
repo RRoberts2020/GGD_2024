@@ -43,12 +43,16 @@ public class JokeScore : MonoBehaviour
 
     public AudioSource Boo;
 
+    private CardArrayHandler cardarrayHandler;
+
     // Start is called before the first frame update
     void Start()
     {
         bonusScore = 0;
         noLike = 0;
         ableToVote = 5;
+
+        cardarrayHandler = GameObject.FindGameObjectWithTag("CardArray").GetComponent<CardArrayHandler>();
     }
 
     private void Update()
@@ -61,6 +65,7 @@ public class JokeScore : MonoBehaviour
                 DisplayTime(timeToReturn);
             }
 
+            /*
             if (timeToReturn <= 0 || ableToVote <= 0)
             {
                 countdownText.text = string.Format("Times up, no more votes");
@@ -68,8 +73,10 @@ public class JokeScore : MonoBehaviour
 
                 StartCoroutine(EndOfRound());
             }
+            */
         }
 
+        /*
         if (Scene3.isStage3 == true)
         {
             if (EndResultVaule > 5)
@@ -82,6 +89,7 @@ public class JokeScore : MonoBehaviour
                 Boo.Play();
             }
         }
+        */
 
 
     }
@@ -105,6 +113,15 @@ public class JokeScore : MonoBehaviour
 
             yesText.text = "Yes: " + bonusScore.ToString();
         }
+
+        //---Moved Here---
+        if (timeToReturn <= 0 || ableToVote <= 0)
+        {
+            countdownText.text = string.Format("Times up, no more votes");
+            ableToVote = -1;
+
+            StartCoroutine(EndOfRound());
+        }
     }
 
     public void NoJoke()
@@ -115,6 +132,15 @@ public class JokeScore : MonoBehaviour
             ableToVote--;
 
             noText.text = "No: " + noLike.ToString();
+        }
+
+        //---Moved Here---
+        if (timeToReturn <= 0 || ableToVote <= 0)
+        {
+            countdownText.text = string.Format("Times up, no more votes");
+            ableToVote = -1;
+
+            StartCoroutine(EndOfRound());
         }
     }
 
@@ -129,11 +155,22 @@ public class JokeScore : MonoBehaviour
 
         playerResultText.text = "Number of yes votes: " + bonusScore.ToString() + "Number of no votes: " + noLike.ToString(); ;
        
-        //AiResultText.text = "Audience rating: " + noLike.ToString();
+        AiResultText.text = "Audience rating: " + cardarrayHandler.AIscore;
 
-        EndResultVaule = (bonusScore /*+ Audiance score */ );
+        EndResultVaule = (bonusScore + cardarrayHandler.AIscore);
 
         EndResultText.text = "Total rating: " + EndResultVaule.ToString();
+
+        // Play sfx based on joke value
+        if (EndResultVaule > 25)
+        {
+            Laugh.Play();
+            cardarrayHandler.AudienceJump();
+        }
+        else
+        {
+            Boo.Play();
+        }
 
         StopCoroutine(EndOfRound());
     }

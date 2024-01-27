@@ -16,9 +16,13 @@ public class CardArrayHandler : MonoBehaviour
     [HideInInspector] public int adjectiveCount;
     [SerializeField] private Transform selectionPanel;
     [SerializeField] private GameManager gameManager;
+    [HideInInspector] public int AIscore;
+    [SerializeField] private Transform audience;
 
     private void Awake()
     {
+        AIscore = 0;
+
         // Load item list
         wordData = wordDataSpreadsheet.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
         wordListNoun = new List<string[]>();
@@ -134,6 +138,7 @@ public class CardArrayHandler : MonoBehaviour
             {
                 if (grandchild.tag == "Word")
                 {
+                    AIscore += grandchild.GetComponent<Card>().point;
                     counter++;
                 }
             }
@@ -146,6 +151,14 @@ public class CardArrayHandler : MonoBehaviour
         else
         {
             print("Please fill all boxes");
+        }
+    }
+
+    public void AudienceJump()
+    {
+        foreach (Transform child in audience)
+        {
+            child.GetComponent<Audience>().jumpForce = 5;
         }
     }
 }
