@@ -39,6 +39,10 @@ public class JokeScore : MonoBehaviour
 
     public int EndResultVaule;
 
+    public AudioSource Laugh;
+
+    public AudioSource Boo;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -65,6 +69,21 @@ public class JokeScore : MonoBehaviour
                 StartCoroutine(EndOfRound());
             }
         }
+
+        if (Scene3.isStage3 == true)
+        {
+            if (EndResultVaule > 5)
+            {
+                Laugh.Play();
+            }
+
+            if (EndResultVaule < 5)
+            {
+                Boo.Play();
+            }
+        }
+
+
     }
 
     void DisplayTime(float timeToDisplay)
@@ -100,11 +119,13 @@ public class JokeScore : MonoBehaviour
     }
 
     IEnumerator EndOfRound()
-    { 
+    {
         yield return new WaitForSeconds(3);
 
         Scene2.Stage2.SetActive(false);
         Scene3.Stage3.SetActive(true);
+
+        Scene3.isStage3 = true;
 
         playerResultText.text = "Number of yes votes: " + bonusScore.ToString() + "Number of no votes: " + noLike.ToString(); ;
        
