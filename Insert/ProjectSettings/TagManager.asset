@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Canvas
   - CardArray
+  - Word
   layers:
   - Default
   - TransparentFX
