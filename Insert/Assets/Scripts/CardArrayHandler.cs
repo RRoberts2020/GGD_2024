@@ -42,6 +42,14 @@ public class CardArrayHandler : MonoBehaviour
         rowLength -= 1;
 
         /*
+        for (int i = 0; i < 10; i++)
+        {
+            // Print 10 words (for testing)
+            print(GetWordDataByID(Random.Range(0, rowLength))[0]);
+        }
+        */
+
+        /*
         foreach (string word in words)
         {
             print(word);
