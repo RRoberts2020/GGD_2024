@@ -8,38 +8,47 @@ public class CardArrayHandler : MonoBehaviour
     // Word data
     [SerializeField] private TextAsset wordDataSpreadsheet;
     private string[] wordData;
-    private string[] words;
-    private string[] wordValue;
-    private string[] wordIsNoun;
+    private List<string[]> wordListNoun;
+    private List<string[]> wordListAdjective;
     private int COLUMNS = 3;
-
     // Can be used in generation of random words as an upper limit on the ID generated (inclusive)
-    [HideInInspector] public int rowLength;
+    [HideInInspector] public int nounCount;
+    [HideInInspector] public int adjectiveCount;
 
     private void Awake()
     {
         // Load item list
         wordData = wordDataSpreadsheet.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
-
-        rowLength = (wordData.Length - 1) / COLUMNS;
-
-        // Set all data arrays lengths
-        words = new string[rowLength];
-        wordValue = new string[rowLength];
-        wordIsNoun = new string[rowLength];
+        wordListNoun = new List<string[]>();
+        wordListAdjective = new List<string[]>();
 
         // Set the data arrays values
-        int idCounter = 0;
-        for (int i = 0; i / COLUMNS < rowLength; i += COLUMNS)
+        for (int i = 0; i / COLUMNS < ((wordData.Length - 1) / COLUMNS); i += COLUMNS)
         {
-            words[idCounter] = wordData[i];
-            wordValue[idCounter] = wordData[i + 1];
-            wordIsNoun[idCounter] = wordData[i + 2];
-            idCounter++;
+            string[] data = new string[3];
+            data[0] = wordData[i];
+            data[1] = wordData[i + 1];
+            data[2] = wordData[i + 2];
+
+            // Check if noun
+            if (bool.Parse(wordData[i + 2]))
+            {
+                // Add data to noun list
+                wordListNoun.Add(data);
+            }
+            else
+            {
+                // Add data to adjective list
+                wordListAdjective.Add(data);
+            }
         }
 
-        // Convert rowLength to start at 0
-        rowLength -= 1;
+        nounCount = wordListNoun.Count;
+        adjectiveCount = wordListAdjective.Count;
+
+        // Convert length to start at 0
+        nounCount -= 1;
+        adjectiveCount -= 1;
 
         /*
         for (int i = 0; i < 10; i++)
@@ -67,26 +76,35 @@ public class CardArrayHandler : MonoBehaviour
         */
     }
 
-    public string[] GetWordDataByID(int ID)
+    public string[] GetWordDataByIDNoun(int ID)
     {
         /*
          * Input an int within the index of the array to get:
          * string word
          * int value
          * bool isNoun
+         * 
+         * If noun is true return nouns
+         * If false return adjectives
          */
 
-        if (ID > rowLength)
+        if (ID > nounCount)
         {
-            print("Given ID exceedes rowLength");
+            print("Error: ID exceeds nounCount");
             return null;
         }
 
-        string[] itemData = new string[COLUMNS];
-        itemData[0] = words[ID];
-        itemData[1] = wordValue[ID];
-        itemData[2] = wordIsNoun[ID];
+        return wordListNoun[ID];
+    }
 
-        return itemData;
+    public string[] GetWordDataByIDAdjective(int ID)
+    {
+        if (ID > adjectiveCount)
+        {
+            print("Error: ID exceeds adjectiveCount");
+            return null;
+        }
+
+        return wordListAdjective[ID];
     }
 }
