@@ -4,13 +4,15 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IDragHandler
+public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] private bool noun;
     private RectTransform m_RectTransform;
     private Canvas m_Canvas;
     private CardArrayHandler m_CardArrayHandler;
     private TextMeshProUGUI m_TextMeshPro;
+    private CanvasGroup m_Group;
+    private Transform m_Parent;
 
     // Data
     private string word;
@@ -21,6 +23,8 @@ public class DragAndDrop : MonoBehaviour, IDragHandler
         m_RectTransform = GetComponent<RectTransform>();
         m_Canvas = GameObject.FindGameObjectWithTag("Canvas").GetComponent<Canvas>();
         m_TextMeshPro = GetComponentInChildren<TextMeshProUGUI>();
+        m_Group = GetComponent<CanvasGroup>();
+        m_Parent = transform.parent;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -53,5 +57,16 @@ public class DragAndDrop : MonoBehaviour, IDragHandler
         }
 
         m_TextMeshPro.SetText(word);
+    }
+
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        this.transform.SetParent(m_Parent, false);
+        m_Group.blocksRaycasts = false;
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        m_Group.blocksRaycasts = true;
     }
 }
