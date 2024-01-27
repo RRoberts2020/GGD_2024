@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndDragHandler
+public class DragAndDrop : Card, IDragHandler, IBeginDragHandler, IEndDragHandler
 {
     [SerializeField] private bool noun;
     private RectTransform m_RectTransform;
@@ -16,7 +16,6 @@ public class DragAndDrop : MonoBehaviour, IDragHandler, IBeginDragHandler, IEndD
 
     // Data
     private string word;
-    private int point;
 
     private void Awake()
     {
