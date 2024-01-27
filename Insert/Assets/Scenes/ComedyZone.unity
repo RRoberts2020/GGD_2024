@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0040295282, g: 0.00022003053, b: 0.000000053855864, a: 1}
+  m_IndirectSpecularColor: {r: 0.0040295273, g: 0.00022003036, b: 0.000000053855864, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -123,6 +123,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &74516603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5656038474905908357, guid: 0c72f7b5f9ca11441a490d8ac8fb2d74, type: 3}
+  m_PrefabInstance: {fileID: 1811098412}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc928a77ee055eb43b2eddd032b5cad1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &652523268
 GameObject:
   m_ObjectHideFlags: 0
@@ -391,7 +402,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &911640499
 Transform:
   m_ObjectHideFlags: 0
@@ -419,7 +430,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: da5d7e40520127745ba70ca14e30c0b1, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -903,18 +914,18 @@ PrefabInstance:
     - target: {fileID: 5728757050045098386, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 652523273}
+      objectReference: {fileID: 74516603}
     - target: {fileID: 5728757050045098386, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5728757050045098386, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: Stage2UI
+      value: CheckCards
       objectReference: {fileID: 0}
     - target: {fileID: 5728757050045098386, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: GameManager, Assembly-CSharp
+      value: CardArrayHandler, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 5728757050045098386, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -1113,7 +1124,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 5b8e7f02508a3b7489bdcee1d0212eb1, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1653,7 +1664,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: d76b820449a836148a9bb668b72a7023, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.5
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -1749,6 +1760,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: Card Array Handler
       objectReference: {fileID: 0}
+    - target: {fileID: 5656038474905908357, guid: 0c72f7b5f9ca11441a490d8ac8fb2d74, type: 3}
+      propertyPath: gameManager
+      value: 
+      objectReference: {fileID: 652523273}
+    - target: {fileID: 5656038474905908357, guid: 0c72f7b5f9ca11441a490d8ac8fb2d74, type: 3}
+      propertyPath: selectionPanel
+      value: 
+      objectReference: {fileID: 1891312845}
     - target: {fileID: 7936078733799153903, guid: 0c72f7b5f9ca11441a490d8ac8fb2d74, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1794,6 +1813,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c72f7b5f9ca11441a490d8ac8fb2d74, type: 3}
+--- !u!224 &1891312845 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 3988512506854394788, guid: b7ddca73e4012a64c831832de51fb08e, type: 3}
+  m_PrefabInstance: {fileID: 1110654802}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

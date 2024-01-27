@@ -14,6 +14,8 @@ public class CardArrayHandler : MonoBehaviour
     // Can be used in generation of random words as an upper limit on the ID generated (inclusive)
     [HideInInspector] public int nounCount;
     [HideInInspector] public int adjectiveCount;
+    [SerializeField] private Transform selectionPanel;
+    [SerializeField] private GameManager gameManager;
 
     private void Awake()
     {
@@ -118,5 +120,32 @@ public class CardArrayHandler : MonoBehaviour
         adjectiveCount -= 1;
 
         return retrunWord;
+    }
+
+    public void CheckCards()
+    {
+        int counter = 0;
+
+        // Its stupid but it works
+        // Checks if the child's child has the "Word" tag and counts it, if it reaches 5 let the player progress
+        foreach (Transform child in selectionPanel)
+        {
+            foreach (Transform grandchild in child)
+            {
+                if (grandchild.tag == "Word")
+                {
+                    counter++;
+                }
+            }
+        }
+
+        if (counter == 5)
+        {
+            gameManager.Stage2UI();
+        }
+        else
+        {
+            print("Please fill all boxes");
+        }
     }
 }
