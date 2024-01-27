@@ -94,7 +94,13 @@ public class CardArrayHandler : MonoBehaviour
             return null;
         }
 
-        return wordListNoun[ID];
+        string[] retrunWord = wordListNoun[ID];
+
+        // Remove from list
+        wordListNoun.Remove(wordListNoun[ID]);
+        nounCount -= 1;
+
+        return retrunWord;
     }
 
     public string[] GetWordDataByIDAdjective(int ID)
@@ -105,6 +111,12 @@ public class CardArrayHandler : MonoBehaviour
             return null;
         }
 
-        return wordListAdjective[ID];
+        string[] retrunWord = wordListAdjective[ID];
+
+        // Remove from list
+        wordListAdjective.Remove(wordListAdjective[ID]);
+        adjectiveCount -= 1;
+
+        return retrunWord;
     }
 }
