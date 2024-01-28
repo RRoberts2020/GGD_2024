@@ -17,7 +17,7 @@ public class JokeScore : MonoBehaviour
 
     private int ableToVote;
     
-    private float timeToReturn = 15f;
+    private float timeToReturn = 60f;
 
     public TextMeshProUGUI countdownText;
 
