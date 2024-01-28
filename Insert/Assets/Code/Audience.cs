@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Audience : MonoBehaviour
 {
-    public float jumpForce = 5f;
+    [HideInInspector] public float jumpForce = 1f;
     private new Rigidbody rigidbody;
 
     public bool happy;
@@ -39,12 +39,12 @@ public class Audience : MonoBehaviour
         yield return new WaitForSeconds(TimeUntilJump);
 
         //Jump up
-        rigidbody.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        rigidbody.AddForce(Vector3.up * jumpForce * Time.deltaTime, ForceMode.Impulse);
 
         yield return new WaitForSeconds(1);
 
         //Come back down
-        rigidbody.AddForce(Vector3.down * jumpForce, ForceMode.Impulse);
+        rigidbody.AddForce(Vector3.down * jumpForce * Time.deltaTime, ForceMode.Impulse);
     }
 
 

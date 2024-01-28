@@ -163,7 +163,7 @@ public class JokeScore : MonoBehaviour
         bonusScore = 0;
         noLike = 0;
         ableToVote = 5;
-        timeToReturn = 15f;
+        timeToReturn = 60;
         EndResultVaule = 0;
 
         yesText.text = "Yes: " + bonusScore.ToString();

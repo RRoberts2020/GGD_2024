@@ -14,9 +14,6 @@ public class DragAndDrop : Card, IDragHandler, IBeginDragHandler, IEndDragHandle
     private CanvasGroup m_Group;
     private Transform m_Parent;
 
-    // Data
-    private string word;
-
     private void Awake()
     {
         m_RectTransform = GetComponent<RectTransform>();

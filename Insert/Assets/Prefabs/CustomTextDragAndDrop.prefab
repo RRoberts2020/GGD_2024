@@ -75,8 +75,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 2150773298
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 0.5}
+    rgba: 4294967040
+  m_fontColor: {r: 0, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0, b: 0, a: 0.2509804}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.5019608}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -629,6 +629,7 @@ PrefabInstance:
     - {fileID: 54837184448588766, guid: 1fa15a4edf73fad429109cca3f4a86f0, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6794579420231081653, guid: 1fa15a4edf73fad429109cca3f4a86f0, type: 3}
+    - {fileID: 6383100581587887666, guid: 1fa15a4edf73fad429109cca3f4a86f0, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 7201669373334705279, guid: 1fa15a4edf73fad429109cca3f4a86f0, type: 3}
       insertIndex: -1
@@ -658,6 +659,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8f4ba6783030a84db5d7f3595037e9a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  point: 0
   m_SpawnLocation: {fileID: 0}
 --- !u!225 &8213853222319942970
 CanvasGroup:

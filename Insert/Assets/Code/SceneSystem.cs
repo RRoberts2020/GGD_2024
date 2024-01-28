@@ -20,11 +20,16 @@ public class SceneSystem : MonoBehaviour
         Application.Quit();
     }
 
-    public void KillSwitch()
+    private void Update()
     {
         if (Input.GetKey(KeyCode.Escape))
         {
-            Application.Quit();
+            KillSwitch();
         }
+    }
+
+    private void KillSwitch()
+    {
+        Application.Quit();
     }
 }

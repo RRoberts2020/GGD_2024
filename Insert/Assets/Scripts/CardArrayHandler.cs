@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,6 +23,8 @@ public class CardArrayHandler : MonoBehaviour
     private GameObject gamePanel;
     [SerializeField] private Transform canvas;
     [SerializeField] private GameObject gamePanelPrefab;
+    [SerializeField] private float audienceJumpValueMin = 1f;
+    [SerializeField] private float audienceJumpValueMax = 5f;
 
     private void Awake()
     {
@@ -103,6 +106,7 @@ public class CardArrayHandler : MonoBehaviour
 
         // Its stupid but it works
         // Checks if the child's child has the "Word" tag and counts it, if it reaches 5 let the player progress
+        List<string> grandchildren = new List<string>();
         selectionPanel = GameObject.Find("SelectionPanel").transform;
         foreach (Transform child in selectionPanel)
         {
@@ -111,6 +115,8 @@ public class CardArrayHandler : MonoBehaviour
                 if (grandchild.tag == "Word")
                 {
                     AIscore += grandchild.GetComponent<Card>().point;
+                    grandchildren.Add(grandchild.GetComponent<Card>().word);
+
                     counter++;
                 }
             }
@@ -119,6 +125,16 @@ public class CardArrayHandler : MonoBehaviour
         if (counter == 5)
         {
             gameManager.Stage2UI();
+
+            // Change joke text
+            TextMeshProUGUI theJoke = GameObject.Find("TheJoke").GetComponent<TextMeshProUGUI>();
+            string finalJoke = "";
+            foreach (string word in grandchildren)
+            {
+                finalJoke += word + " ";
+            }
+
+            theJoke.text = finalJoke;
         }
         else
         {
@@ -130,7 +146,7 @@ public class CardArrayHandler : MonoBehaviour
     {
         foreach (Transform child in audience)
         {
-            child.GetComponent<Audience>().jumpForce = 5;
+            child.GetComponent<Audience>().jumpForce = audienceJumpValueMax;
         }
     }
 
@@ -182,7 +198,7 @@ public class CardArrayHandler : MonoBehaviour
 
         foreach (Transform child in audience)
         {
-            child.GetComponent<Audience>().jumpForce = 0.6f;
+            child.GetComponent<Audience>().jumpForce = audienceJumpValueMin;
         }
     }
 }

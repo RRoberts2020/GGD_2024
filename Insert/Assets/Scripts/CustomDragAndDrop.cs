@@ -59,6 +59,7 @@ public class CustomDragAndDrop : Card, IDragHandler, IBeginDragHandler, IEndDrag
 
         // Base 3 points, minus number of words
         point = 3 - words.Length;
+        word = text;
 
         return point;
     }
