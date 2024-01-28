@@ -18,6 +18,7 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Stage1 = GameObject.FindGameObjectWithTag("GamePanel");
         Stage1.SetActive(true);
         Stage2.SetActive(false);
         Stage3.SetActive(false);
@@ -33,6 +34,7 @@ public class GameManager : MonoBehaviour
 
     public void Stage2UI() 
     {
+        Stage1 = GameObject.FindGameObjectWithTag("GamePanel");
         Stage1.SetActive(false);
         Stage2.SetActive(true);
         Stage3.SetActive(false);
@@ -42,6 +44,7 @@ public class GameManager : MonoBehaviour
 
     public void Stage3UI()
     {
+        Stage1 = GameObject.FindGameObjectWithTag("GamePanel");
         Stage1.SetActive(false);
         Stage2.SetActive(false);
         Stage3.SetActive(true);

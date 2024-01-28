@@ -170,7 +170,7 @@ public class JokeScore : MonoBehaviour
         noText.text = "No: " + noLike.ToString();
 
         // AI score???
-
+        cardarrayHandler.ResetValues();
     }
 
 }

@@ -19,42 +19,13 @@ public class CardArrayHandler : MonoBehaviour
     [HideInInspector] public int AIscore;
     [SerializeField] private Transform audience;
 
+    private GameObject gamePanel;
+    [SerializeField] private Transform canvas;
+    [SerializeField] private GameObject gamePanelPrefab;
+
     private void Awake()
     {
-        AIscore = 0;
-
-        // Load item list
-        wordData = wordDataSpreadsheet.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
-        wordListNoun = new List<string[]>();
-        wordListAdjective = new List<string[]>();
-
-        // Set the data arrays values
-        for (int i = 0; i / COLUMNS < ((wordData.Length - 1) / COLUMNS); i += COLUMNS)
-        {
-            string[] data = new string[3];
-            data[0] = wordData[i];
-            data[1] = wordData[i + 1];
-            data[2] = wordData[i + 2];
-
-            // Check if noun
-            if (bool.Parse(wordData[i + 2]))
-            {
-                // Add data to noun list
-                wordListNoun.Add(data);
-            }
-            else
-            {
-                // Add data to adjective list
-                wordListAdjective.Add(data);
-            }
-        }
-
-        nounCount = wordListNoun.Count;
-        adjectiveCount = wordListAdjective.Count;
-
-        // Convert length to start at 0
-        nounCount -= 1;
-        adjectiveCount -= 1;
+        ResetValues();
 
         /*
         for (int i = 0; i < 10; i++)
@@ -132,6 +103,7 @@ public class CardArrayHandler : MonoBehaviour
 
         // Its stupid but it works
         // Checks if the child's child has the "Word" tag and counts it, if it reaches 5 let the player progress
+        selectionPanel = GameObject.Find("SelectionPanel").transform;
         foreach (Transform child in selectionPanel)
         {
             foreach (Transform grandchild in child)
@@ -159,6 +131,58 @@ public class CardArrayHandler : MonoBehaviour
         foreach (Transform child in audience)
         {
             child.GetComponent<Audience>().jumpForce = 5;
+        }
+    }
+
+    public void ResetValues()
+    {
+        if (gamePanel != null)
+        {
+            Destroy(gamePanel);
+        }
+
+        gamePanel = Instantiate(gamePanelPrefab, canvas);
+
+        selectionPanel = GameObject.Find("SelectionPanel").transform;
+
+        AIscore = 0;
+
+        // Load item list
+        wordData = wordDataSpreadsheet.text.Split(new string[] { ",", "\n" }, System.StringSplitOptions.None);
+        wordListNoun = new List<string[]>();
+        wordListAdjective = new List<string[]>();
+
+        // Set the data arrays values
+        for (int i = 0; i / COLUMNS < ((wordData.Length - 1) / COLUMNS); i += COLUMNS)
+        {
+            string[] data = new string[3];
+            data[0] = wordData[i];
+            data[1] = wordData[i + 1];
+            data[2] = wordData[i + 2];
+
+            // Check if noun
+            if (bool.Parse(wordData[i + 2]))
+            {
+                // Add data to noun list
+                wordListNoun.Add(data);
+            }
+            else
+            {
+                // Add data to adjective list
+                wordListAdjective.Add(data);
+            }
+        }
+
+        nounCount = wordListNoun.Count;
+        adjectiveCount = wordListAdjective.Count;
+
+        // Convert length to start at 0
+        nounCount -= 1;
+        adjectiveCount -= 1;
+
+        foreach (Transform child in audience)
+        {
+            child.GetComponent<Audience>().jumpForce = 0.6f;
         }
     }
 }
