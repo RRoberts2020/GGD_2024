@@ -11,12 +11,12 @@ public class JokeScore : MonoBehaviour
 
 
     //Stage 2 stuff
-    public int bonusScore;
+    private int bonusScore;
 
     private int noLike;
 
     private int ableToVote;
-
+    
     private float timeToReturn = 15f;
 
     public TextMeshProUGUI countdownText;
@@ -26,6 +26,12 @@ public class JokeScore : MonoBehaviour
     public TextMeshProUGUI noText;
 
     //Stage 3 stuff
+
+    public GameManager Scene1Func;
+
+    public GameManager Scene2Func;
+
+    public GameManager Scene3Func;
 
     public GameManager Scene2;
 
@@ -37,13 +43,15 @@ public class JokeScore : MonoBehaviour
 
     public TextMeshProUGUI EndResultText;
 
-    public int EndResultVaule;
+    private int EndResultVaule;
 
     public AudioSource Laugh;
 
     public AudioSource Boo;
 
     private CardArrayHandler cardarrayHandler;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -65,33 +73,11 @@ public class JokeScore : MonoBehaviour
                 DisplayTime(timeToReturn);
             }
 
-            /*
-            if (timeToReturn <= 0 || ableToVote <= 0)
+            if (timeToReturn <= 0)
             {
-                countdownText.text = string.Format("Times up, no more votes");
-                ableToVote = -1;
-
-                StartCoroutine(EndOfRound());
-            }
-            */
-        }
-
-        /*
-        if (Scene3.isStage3 == true)
-        {
-            if (EndResultVaule > 5)
-            {
-                Laugh.Play();
-            }
-
-            if (EndResultVaule < 5)
-            {
-                Boo.Play();
+                countdownText.text = string.Format("Times up, last vote available");
             }
         }
-        */
-
-
     }
 
     void DisplayTime(float timeToDisplay)
@@ -112,15 +98,13 @@ public class JokeScore : MonoBehaviour
             ableToVote--;
 
             yesText.text = "Yes: " + bonusScore.ToString();
-        }
 
-        //---Moved Here---
-        if (timeToReturn <= 0 || ableToVote <= 0)
-        {
-            countdownText.text = string.Format("Times up, no more votes");
-            ableToVote = -1;
+            if (timeToReturn <= 0 || ableToVote <= 0)
+            {
+                ableToVote = -1;
 
-            StartCoroutine(EndOfRound());
+                EndOfRound();
+            }
         }
     }
 
@@ -132,26 +116,21 @@ public class JokeScore : MonoBehaviour
             ableToVote--;
 
             noText.text = "No: " + noLike.ToString();
-        }
 
-        //---Moved Here---
-        if (timeToReturn <= 0 || ableToVote <= 0)
-        {
-            countdownText.text = string.Format("Times up, no more votes");
-            ableToVote = -1;
+            if (timeToReturn <= 0 || ableToVote <= 0)
+            {
+                ableToVote = -1;
 
-            StartCoroutine(EndOfRound());
+                EndOfRound();
+            }
         }
     }
 
-    IEnumerator EndOfRound()
+    private void EndOfRound()
     {
-        yield return new WaitForSeconds(3);
-
+        Scene2.isStage2 = false;
         Scene2.Stage2.SetActive(false);
         Scene3.Stage3.SetActive(true);
-
-        Scene3.isStage3 = true;
 
         playerResultText.text = "Number of yes votes: " + bonusScore.ToString() + "Number of no votes: " + noLike.ToString(); ;
        
@@ -171,9 +150,27 @@ public class JokeScore : MonoBehaviour
         {
             Boo.Play();
         }
-
-        StopCoroutine(EndOfRound());
     }
+    public void Reset()
+    {
+        Scene1Func.Stage1.SetActive(true);
+        Scene2Func.Stage2.SetActive(false);
+        Scene3Func.Stage3.SetActive(false);
 
+        Scene2.isStage2 = false;
+
+        // Reset vaules
+        bonusScore = 0;
+        noLike = 0;
+        ableToVote = 5;
+        timeToReturn = 15f;
+        EndResultVaule = 0;
+
+        yesText.text = "Yes: " + bonusScore.ToString();
+        noText.text = "No: " + noLike.ToString();
+
+        // AI score???
+
+    }
 
 }

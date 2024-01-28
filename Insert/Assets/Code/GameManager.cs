@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -13,8 +14,6 @@ public class GameManager : MonoBehaviour
 
     public bool isStage2;
 
-    public bool isStage3;
-
 
     // Start is called before the first frame update
     void Start()
@@ -24,27 +23,12 @@ public class GameManager : MonoBehaviour
         Stage3.SetActive(false);
 
         isStage2 = false;
-        isStage3 = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         
-    }
-
-    public void Reset()
-    {
-        Stage1.SetActive(true);
-        Stage2.SetActive(false);
-        Stage3.SetActive(false);
-
-        isStage2 = false;
-        isStage3 = false;
-
-        // Reset vaules
-
-        //Score, timer, words
     }
 
     public void Stage2UI() 
@@ -54,7 +38,6 @@ public class GameManager : MonoBehaviour
         Stage3.SetActive(false);
 
         isStage2 = true;
-        isStage3 = false;
     }
 
     public void Stage3UI()
@@ -64,6 +47,7 @@ public class GameManager : MonoBehaviour
         Stage3.SetActive(true);
 
         isStage2 = false;
-        isStage3 = true;
     }
+
+
 }
