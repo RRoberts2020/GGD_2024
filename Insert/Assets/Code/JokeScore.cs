@@ -132,7 +132,7 @@ public class JokeScore : MonoBehaviour
         Scene2.Stage2.SetActive(false);
         Scene3.Stage3.SetActive(true);
 
-        playerResultText.text = "Number of yes votes: " + bonusScore.ToString() + "Number of no votes: " + noLike.ToString(); ;
+        playerResultText.text = "Number of yes votes: " + bonusScore.ToString() + "\n" + "Number of no votes: " + noLike.ToString(); ;
        
         AiResultText.text = "Audience rating: " + cardarrayHandler.AIscore;
 
